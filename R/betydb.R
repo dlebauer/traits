@@ -63,42 +63,42 @@
 #' @export
 #' @rdname betydb
 betydb_traits <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(id = id, genus = genus, species = species))
+  args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("traits",id, fmt), args, key, user, pwd, "trait", ...)
 }
 
 #' @export
 #' @rdname betydb
 betydb_species <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(id = id, genus = genus, species = species))
+  args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("species",id, fmt), args, key, user, pwd, "specie", ...)
 }
 
 #' @export
 #' @rdname betydb
 betydb_yields <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(id = id, genus = genus, species = species))
+  args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("yields",id, fmt), args, key, user, pwd, "yield", ...)
 }
 
 #' @export
 #' @rdname betydb
 betydb_citations <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(id = id, genus = genus, species = species))
+  args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("citations",id, fmt), args, key, user, pwd, "citation", ...)
 }
 
 #' @export
 #' @rdname betydb
 betydb_variables <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(id = id, genus = genus, species = species))
+  args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("variables",id, fmt), args, key, user, pwd, "variable", ...)
 }
 
 #' @export
 #' @rdname betydb
 betydb_sites <- function(id = NULL, city = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(id = id, city = city))
+  args <- traitsc(list(city = city))
   betydb_GET(url=makeurl("sites",id, fmt), args, key, user, pwd, "site", ...)
 }
 
