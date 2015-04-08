@@ -63,7 +63,9 @@
 #' @export
 #' @rdname betydb
 betydb_traits <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
+  include <- NULL
+  if (!is.null(genus) || !is.null(species)) include = 'specie'
+  args <- traitsc(list(include = include, species.genus = genus, species.species = species))
   betydb_GET(url=makeurl("traits",id, fmt), args, key, user, pwd, "trait", ...)
 }
 
@@ -77,21 +79,27 @@ betydb_species <- function(id = NULL, genus = NULL, species = NULL, fmt = "json"
 #' @export
 #' @rdname betydb
 betydb_yields <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
+  include <- NULL
+  if (!is.null(genus) || !is.null(species)) include = 'specie'
+  args <- traitsc(list(include = include, species.genus = genus, species.species = species))
   betydb_GET(url=makeurl("yields",id, fmt), args, key, user, pwd, "yield", ...)
 }
 
 #' @export
 #' @rdname betydb
 betydb_citations <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
+  include <- NULL
+  if (!is.null(genus) || !is.null(species)) include = 'specie'
+  args <- traitsc(list(include = include, species.genus = genus, species.species = species))
   betydb_GET(url=makeurl("citations",id, fmt), args, key, user, pwd, "citation", ...)
 }
 
 #' @export
 #' @rdname betydb
 betydb_variables <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
+  include <- NULL
+  if (!is.null(genus) || !is.null(species)) include = 'specie'
+  args <- traitsc(list(include = include, species.genus = genus, species.species = species))
   betydb_GET(url=makeurl("variables",id, fmt), args, key, user, pwd, "variable", ...)
 }
 
