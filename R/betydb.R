@@ -110,6 +110,15 @@ betydb_sites <- function(id = NULL, city = NULL, fmt = "json", key=NULL, user=NU
   betydb_GET(url=makeurl("sites",id, fmt), args, key, user, pwd, "site", ...)
 }
 
+
+# queries traits_and_yields_view by specific fields
+#' @export
+#' @rdname betydb
+betydb_traits_and_yields <- function(id = NULL, sitename = NULL, genus = NULL, author = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+  args <- traitsc(list(sitename = sitename, genus = genus, author = author))
+  betydb_GET(url=makeurl("traits_and_yields_view",id, fmt), args, key, user, pwd, "traits_and_yields_view", ...)
+}
+
 betydb_http <- function(url, args = list(), key, user, pwd, ...){
   auth <- betydb_auth(user, pwd, key)
   res <- if(is.null(auth$key)){
