@@ -62,10 +62,10 @@
 
 #' @export
 #' @rdname betydb
-betydb_traits <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  include <- NULL
-  if (!is.null(genus) || !is.null(species)) include = 'specie'
-  args <- traitsc(list(include = include, species.genus = genus, species.species = species))
+betydb_traits <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, include='variables' ...){
+  if (!is.null(genus) || !is.null(species)) specie = 'specie' else specie = NULL
+  args <- traitsc(list(include = traitsc(list('variables', specie)), species.genus = genus, species.species = species))
+  args <- jsonlite::toJSON(args, auto_unbox=TRUE)
   betydb_GET(url=makeurl("traits",id, fmt), args, key, user, pwd, "trait", ...)
 }
 
