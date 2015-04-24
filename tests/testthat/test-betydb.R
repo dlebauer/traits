@@ -13,6 +13,8 @@ test_that("BETYdb API works", {
   query_yield_genus <- betydb_yields(genus = "Pinus")
   query_yield_species <- betydb_yields(genus = "Miscanthus", species = "giganteus")
 
+  ## This url works:
+  ## https://www.betydb.org/traits.json?include[]=variable&include[]=specie&species.genus=Acer&key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv
   query_traits_genus <- betydb_traits(genus = "Acer")
   query_traits_species <- betydb_yields(genus = "Acer", species = "rubrum")
   a <- betydb_traits(genus = "Miscanthus")

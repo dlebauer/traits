@@ -10,7 +10,9 @@ Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
     person("Zachary", "Foster", role = "aut",
     email = "zacharyfoster1989@gmail.com"),
     person("Ignasi", "Bartomeus", role = "aut",
-    email = "nacho.bartomeus@gmail.com"))
+    email = "nacho.bartomeus@gmail.com"),
+    person("LeBauer", "David", role = "aut",
+    email = "dlebauer@gmail.com"))
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/traits
 BugReports: http://www.github.com/ropensci/traits/issues
