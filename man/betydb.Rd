@@ -2,52 +2,40 @@
 % Please edit documentation in R/betydb.R
 \name{betydb}
 \alias{betydb}
-\alias{betydb_citation}
 \alias{betydb_citations}
-\alias{betydb_site}
 \alias{betydb_sites}
-\alias{betydb_specie}
 \alias{betydb_species}
-\alias{betydb_trait}
 \alias{betydb_traits}
+\alias{betydb_traits_and_yields}
 \alias{betydb_variables}
-\alias{betydb_yield}
 \alias{betydb_yields}
 \title{Search for traits from BettyDB}
 \usage{
-betydb_traits(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
+betydb_traits(id = NULL, genus = NULL, species = NULL, fmt = "json",
+  key = NULL, user = NULL, pwd = NULL, include = "variables", ...)
 
-betydb_species(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_yields(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_citations(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_variables(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_sites(city = NULL, fmt = "json", key = NULL, user = NULL,
-  pwd = NULL, ...)
-
-betydb_trait(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_specie(id, genus = NULL, species = NULL, fmt = "json",
+betydb_species(id = NULL, genus = NULL, species = NULL, fmt = "json",
   key = NULL, user = NULL, pwd = NULL, ...)
 
-betydb_yield(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_citation(id, genus = NULL, species = NULL, fmt = "json",
+betydb_yields(id = NULL, genus = NULL, species = NULL, fmt = "json",
   key = NULL, user = NULL, pwd = NULL, ...)
 
-betydb_site(id, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
+betydb_citations(id = NULL, genus = NULL, species = NULL, fmt = "json",
+  key = NULL, user = NULL, pwd = NULL, ...)
+
+betydb_variables(id = NULL, genus = NULL, species = NULL, fmt = "json",
+  key = NULL, user = NULL, pwd = NULL, ...)
+
+betydb_sites(id = NULL, city = NULL, fmt = "json", key = NULL,
+  user = NULL, pwd = NULL, ...)
+
+betydb_traits_and_yields(id = NULL, sitename = NULL, genus = NULL,
+  author = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
+  ...)
 }
 \arguments{
+\item{id}{(integer) One or more ids for a species, site, variable, etc.}
+
 \item{genus}{(character) A genus name. Optional}
 
 \item{species}{(character) A specific epithet. Optional}
@@ -64,8 +52,6 @@ Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
 
 \item{city}{(character) City name. Optional}
-
-\item{id}{(integer) One or more ids for a species, site, variable, etc.}
 }
 \description{
 Search for traits from BettyDB
@@ -112,13 +98,13 @@ betydb_sites(city = 'Beddington')
 
 # Get by ID
 ## Traits
-betydb_trait(id = 10)
+betydb_traits(id = 10) or betydb_traits(10)
 ## Species
-betydb_specie(id = 1)
+betydb_species(id = 1)
 ## Citations
-betydb_citation(id = 1)
+betydb_citations(id = 1)
 ## Citations
-betydb_site(id = 795)
+betydb_sites(id = 795)
 }
 }
 \author{
