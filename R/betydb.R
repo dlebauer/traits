@@ -59,14 +59,25 @@
 #' ## Citations
 #' betydb_sites(id = 795)
 #' }
-
 #' @export
 #' @rdname betydb
-betydb_traits <- function(id = NULL, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, include='variables' ...){
-  if (!is.null(genus) || !is.null(species)) specie = 'specie' else specie = NULL
-  args <- traitsc(list(include = traitsc(list('variables', specie)), species.genus = genus, species.species = species))
-  args <- jsonlite::toJSON(args, auto_unbox=TRUE)
-  betydb_GET(url=makeurl("traits",id, fmt), args, key, user, pwd, "trait", ...)
+betydb_traits <- function(id = NULL, genus = NULL, species = NULL,
+                          fmt = "json", key=NULL, user=NULL, pwd=NULL,
+                          include = 'variable', ...){
+
+  if (!is.null(genus) || !is.null(species)) include = c(include, 'specie')
+  args <- traitsc(list(include = include, species.genus = genus, species.species = species))
+  #url = paste0(makeurl("traits",id, fmt), "?include[]=variable")
+  url = makeurl("traits",id, fmt)
+  betydb_GET(url = url, args, key, user, pwd, "trait")#, ...)
+
+#   specie <- ifelse ((!is.null(genus) || !is.null(species)), 'specie', NULL)
+#   args <- traitsc(list(
+#     include = traitsc(list('variables', specie)),
+#     species.genus = genus, species.species = species))
+#   #args <- jsonlite::toJSON(args.list, auto_unbox=TRUE)
+#   betydb_GET(url = makeurl("traits",id, fmt),
+#              args, key, user, pwd, "trait", ...)
 }
 
 #' @export
@@ -110,7 +121,6 @@ betydb_sites <- function(id = NULL, city = NULL, fmt = "json", key=NULL, user=NU
   betydb_GET(url=makeurl("sites",id, fmt), args, key, user, pwd, "site", ...)
 }
 
-
 # queries traits_and_yields_view by specific fields
 #' @export
 #' @rdname betydb
@@ -121,24 +131,31 @@ betydb_traits_and_yields <- function(id = NULL, sitename = NULL, genus = NULL, a
 
 betydb_http <- function(url, args = list(), key, user, pwd, ...){
   auth <- betydb_auth(user, pwd, key)
-  res <- if(is.null(auth$key)){
-    GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
+  if(is.null(auth$key)){
+    res <- GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
   } else {
-    GET(url, query = c(key=auth$key, args), ...)
+    res <- GET(url, query = c(key=auth$key, args), ...)
   }
   stop_for_status(res)
   content(res, "text")
 }
 
 betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
-  if(is.null(c(key, user, pwd))){ ## could also test connection first; send error about using default
+  if(is.null(c(key, user, pwd))){
+    ## could also test connection first; send error about using default
     # print("no credentials supplied, using defaults")
-    user <- 'ropensci-traits'
-    pwd <- 'ropensci'
+    #user <- 'ropensci-traits'
+    #pwd <- 'ropensci'
+    key <- 'eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv'
   }
   txt <- betydb_http(url, args, key, user, pwd, ...)
-  lst <- jsonlite::fromJSON(txt, TRUE, flatten = TRUE)
-  setNames(tbl_df(lst), gsub(sprintf("%s\\.", which), "", names(lst)))
+  if(txt == "[]"){
+    result <- NULL
+  } else {
+    lst <- jsonlite::fromJSON(txt, TRUE, flatten = TRUE)
+    result <- setNames(tbl_df(lst), gsub(sprintf("%s\\.", which), "", names(lst)))
+  }
+  return(result)
 }
 
 betydb_auth <- function(x,y,z){

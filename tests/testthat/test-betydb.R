@@ -4,6 +4,18 @@ test_that("BETYdb API works", {
   ## gh-18
   get.out <- GET("https://www.betydb.org/priors.json") # Priors is a small table
   expect_is(get.out, "response")
+
+  expect_null(betydb_yields(genus = "Not A Genus"))
+  expect_null(betydb_traits(genus = "Not A Genus"))
+  expect_null(betydb_yields(species = "Not A Species"))
+  expect_null(betydb_traits(species = "Not A Species"))
+
+  query_yield_genus <- betydb_yields(genus = "Pinus")
+  query_yield_species <- betydb_yields(genus = "Miscanthus", species = "giganteus")
+
+  query_traits_genus <- betydb_traits(genus = "Acer")
+  query_traits_species <- betydb_yields(genus = "Acer", species = "rubrum")
+  a <- betydb_traits(genus = "Miscanthus")
 })
 
 test_that("Genus / Species queries work", {
